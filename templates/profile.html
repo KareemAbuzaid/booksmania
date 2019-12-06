@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block title %}
+Book
+{% endblock %}
+{% block main %}
+{% for book in books %}
+<div style="text-align: left;">
+    <h1>
+        {{ book['title'] }}
+    </h1>
+    <p>
+        Author: {{ book['author_name'] }}
+    </p>
+    <p>
+        Publication year: {{ book['pub_date'] }}
+    </p>
+    <p>
+        ISBN#: {{ book['isbn'] }}
+    </p>
+    <p>
+        Goodreads Rating count: {{ book['rating_count'] }}
+    </p>
+    <p>
+        Goodreads rating: {{ book['rating'] }}
+    </p>
+</div>
+{% endfor %}
+<p id="no-reviews"></p>
+<div id="scroller" class="mb-3">
+    <!-- template schema, hidden from the dom -->
+    <template id="comment_template">
+
+        <!-- template content -->
+        <div class="card">
+            <div class="card-header" id="username">
+                Featured
+            </div>
+            <div class="card-body">
+                <p class="card-text" id="review"></p>
+            </div>
+        </div>
+        <br>
+    </template>
+</div>
+<div class="comments-container">
+    <form action="/post_review" method="post">
+        <div>
+<textarea class="form-control z-depth-1" name="comment" placeholder="Review book" id="comment">
+
+</textarea>
+        </div>
+        </br>
+        <input type="submit" id="submit-btn" class="btn btn-primary" value="Post Review">
+    </form>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='reviews.js') }}"></script>
+{% endblock %}

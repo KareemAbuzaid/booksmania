@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}
+My Books
+{% endblock %}
+
+{% block main %}
+<main class="mt-3">
+    <div class="container">
+        <div class="colomn">
+                <h1 class="display-4 mb-3">My Books</h1>
+                <!-- div to contain the content -->
+                <div id="scroller" class="mb-3">
+                    <!-- template schema, hidden from the dom -->
+                    {% for book in books %}
+                    <div id="post_template">
+                        <!-- template content -->
+                        <div class="card mb-3 animated fadeIn shadow-sm">
+                            <a href="/profile/{{ book.id }}" id="book-link" class="link">
+                                <div class="card-body">
+                                    <h4 class="card-title left" id="book">{{ book.title }}</h4>
+                                    <p class="text-muted left" id="author">{{ book.name }}</p>
+                                    <p class="text-muted left" id="isbn">{{ book.isbn }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- element to trigger the IntersectionObserver -->
+                <div class="d-flex justify-content-center mb-3" id="sentinel">
+                    <div class="spinner-border" role="status"></div>
+                </div>
+        </div>
+    </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='scroll.js') }}"></script>
+</main>
+{% endblock %}
